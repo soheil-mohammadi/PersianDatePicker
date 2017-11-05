@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/container_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+            <ImageView
+                android:id="@+id/img_back_dialog_date_picker"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/back"
+                android:layout_height="wrap_content" />
+
+            <com.picker.date.persian.parisa.soheil.persiandatepicker.CustomTextView
+                android:id="@+id/txt_year_dialog"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                tools:text="1396" />
+            <ImageView
+                android:id="@+id/img_go_dialog_date_picker"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/go"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <com.picker.date.persian.parisa.soheil.persiandatepicker.CustomTextView
+                    android:id="@+id/txt_month_dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    tools:text="مرداد" />
+
+                <com.picker.date.persian.parisa.soheil.persiandatepicker.CustomTextView
+                    android:id="@+id/txt_day_dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    tools:text="28" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <com.picker.date.persian.parisa.soheil.persiandatepicker.CustomTextView
+                    android:id="@+id/txt_lable_now_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="امروز :"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

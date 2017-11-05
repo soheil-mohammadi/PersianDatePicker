@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomTextView">
+        <attr name="isans" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="DatePickerPersianView">
+        <attr name="start_year" format="integer"/>
+        <attr name="end_year" format="integer" />
+        <attr name="background_lable_month" format="color"/>
+    </declare-styleable>
+
+</resources>
