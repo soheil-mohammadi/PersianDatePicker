@@ -1,15 +1,17 @@
 package Adapter;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.picker.date.persian.parisa.soheil.persiandatepicker.CircleText;
 import com.picker.date.persian.parisa.soheil.persiandatepicker.DatePickerPersian;
 import com.picker.date.persian.parisa.soheil.persiandatepicker.JalaliCalendar;
 import com.picker.date.persian.parisa.soheil.persiandatepicker.R;
@@ -132,17 +134,18 @@ public class DatePickerAdapterView extends RecyclerView.Adapter<DatePickerAdapte
     class  view_holder extends  RecyclerView.ViewHolder {
 
         View line_border_bottom ;
-        TextView txt_day ;
+        CircleText txt_day ;
 
         view_holder(View view) {
             super(view);
             line_border_bottom =  view.findViewById(R.id.line_border_bottom);
-            txt_day = (TextView) view.findViewById(R.id.txt_day);
+            txt_day = (CircleText) view.findViewById(R.id.txt_day);
         }
     }
 
     private  void set_day_text(view_holder holder , Integer data) {
 
+        holder.txt_day.build(20 , false , Color.GREEN);
         holder.txt_day.setText(data + "");
         holder.line_border_bottom.setVisibility(View.VISIBLE);
 
@@ -151,25 +154,51 @@ public class DatePickerAdapterView extends RecyclerView.Adapter<DatePickerAdapte
         }
         if((this.year + "/" + this.month + "/" + data).equals(Integer.parseInt(jalali_date[0]) +"/" +Integer.parseInt(jalali_date[1])+ "/" + Integer.parseInt(jalali_date[2])) ) {
             holder.line_border_bottom.setBackgroundColor(Color.GREEN);
-            holder.txt_day.setTextColor(Color.BLACK);
+            holder.txt_day.setText(data + "");
         }
         is_set_first_position = true ;
     }
 
 
     private void handle_click_days(final view_holder holder ) {
-        if (holder.txt_day.getText().toString().equals("")) {
-            holder.txt_day.setClickable(false);
-        } else {
+        final int colorFrom = Color.TRANSPARENT;
+        final int colorTo = Color.GREEN;
+
             holder.txt_day.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     clickDayListener.on_click(year, month, Integer.parseInt(holder.txt_day.getText().toString()));
+                    ObjectAnimator colorAnim = ObjectAnimator.ofObject(holder.txt_day , "backgroundColor" , new ArgbEvaluator() , colorFrom , colorTo  );
+                    colorAnim.setDuration(500);
+                    colorAnim.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+
+                        }
+                    });
+
+                    colorAnim.start();
                     if(dialog != null ){
                         dialog.cancel();
                     }
                 }
             });
         }
-    }
+
 }
