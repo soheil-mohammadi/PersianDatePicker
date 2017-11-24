@@ -1,10 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.soheil-mohammadi'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.picker.date.persian.parisa.soheil.persiandatepicker"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1

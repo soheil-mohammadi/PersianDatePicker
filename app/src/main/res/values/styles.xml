@@ -21,12 +21,16 @@
     <style name="DialogTranslationAnim" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/CustomDialogTranslateAnim</item>
         <item name="android:windowBackground">@android:color/background_light</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
     </style>
 
 
     <style name="DialogRotateAnim" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/CustomDialogRotateAnim</item>
         <item name="android:windowBackground">@android:color/background_light</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
     </style>
 
 

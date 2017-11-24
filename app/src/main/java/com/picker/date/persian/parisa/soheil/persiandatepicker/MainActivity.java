@@ -26,15 +26,14 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatePickerPersianView date_picker_persian = (DatePickerPersianView) findViewById(R.id.date_picker_persian);
-        date_picker_persian.set_support_fragmentManager(getSupportFragmentManager());
-
+        date_picker_persian.build(getSupportFragmentManager());
     }
 
 
     @Override
     public void onClick(View v) {
         DatePickerPersian datePickerPersian = DatePickerPersian.get_instance();
-        datePickerPersian.show_Dialog(this ,DatePickerPersian.TRANSALATE_ANIM , null  , 0 ,R.color.colorPrimary, this);
+        datePickerPersian.show_Dialog(this ,DatePickerPersian.TRANSALATE_ANIM , null  , 0 ,R.color.colorPrimary, Color.RED , Color.BLUE , this);
     }
 
     @Override

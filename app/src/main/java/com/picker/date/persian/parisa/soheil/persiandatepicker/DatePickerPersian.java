@@ -3,7 +3,6 @@ package com.picker.date.persian.parisa.soheil.persiandatepicker;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Adapter.DatePickerAdpaterDialog;
+import Adapter.DatePickerAdpaterContainer;
 import Interface.DayClickListenerPersianDatePicker;
 import Interface.ListenerDateListPickerPersian;
 
@@ -26,22 +25,26 @@ public class DatePickerPersian {
 
     private static DatePickerPersian instance;
 
-    public static  final  String TRANSALATE_ANIM = "TRANSALATE_ANIM";
-    public static  final  String ROTATE_ANIM = "ROTATE_ANIM";
+    public static final String TRANSALATE_ANIM = "TRANSALATE_ANIM";
+    public static final String ROTATE_ANIM = "ROTATE_ANIM";
 
 
-    private final String FARVARDIN = "1";
-    private final String ORDIBEHESHT = "2";
-    private final String KHORDAD = "3";
-    private final String TIR = "4";
-    private final String MORDAD = "5";
-    private final String SHAHRIVAR = "6";
-    private final String MEHR = "7";
-    private final String ABAN = "8";
-    private final String AZAR = "9";
-    private final String DAAY = "10";
-    private final String BAHMAN = "11";
-    private final String ESFAND = "12";
+    private static  Typeface isans_noraml ;
+    private static  Typeface isans_bold ;
+
+
+    private final int FARVARDIN = 1;
+    private final int ORDIBEHESHT = 2;
+    private final int KHORDAD = 3;
+    private final int TIR = 4;
+    private final int MORDAD = 5;
+    private final int SHAHRIVAR = 6;
+    private final int MEHR = 7;
+    private final int ABAN = 8;
+    private final int AZAR = 9;
+    private final int DAAY = 10;
+    private final int BAHMAN = 11;
+    private final int ESFAND = 12;
 
 
     public static DatePickerPersian get_instance() {
@@ -52,21 +55,22 @@ public class DatePickerPersian {
         }
     }
 
-    public void show_Dialog(final Context context, String style , @Nullable Typeface typeface , int background_color_header, final int background_date_picker_txt_month , final DayClickListenerPersianDatePicker clickDayListener) {
-        final Dialog dialog ;
+    public void show_Dialog(final Context context, String style, @Nullable Typeface typeface, int background_color_header, final int background_date_picker_txt_month,
+                            final int backgroundColorDay , final int backgroundColorCurrentDay, final DayClickListenerPersianDatePicker clickDayListener) {
+        final Dialog dialog;
 
-        if(style != null) {
-           if(style.equals(TRANSALATE_ANIM)) {
-              dialog = new Dialog(context , R.style.DialogTranslationAnim);
-           }else  {
-               dialog= new Dialog(context , R.style.DialogRotateAnim);
-           }
-       }else  {
-          dialog = new Dialog(context);
-       }
+        if (style != null) {
+            if (style.equals(TRANSALATE_ANIM)) {
+                dialog = new Dialog(context, R.style.DialogTranslationAnim);
+            } else {
+                dialog = new Dialog(context, R.style.DialogRotateAnim);
+            }
+        } else {
+            dialog = new Dialog(context);
+        }
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_date_picker_persian);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         final RecyclerView recycler_dialog = (RecyclerView) dialog.findViewById(R.id.recycler_dialog);
         final TextView txt_year_dialog = (TextView) dialog.findViewById(R.id.txt_year_dialog);
         LinearLayout container_dialog = (LinearLayout) dialog.findViewById(R.id.container_dialog);
@@ -74,7 +78,7 @@ public class DatePickerPersian {
         TextView txt_day_dialog = (TextView) dialog.findViewById(R.id.txt_day_dialog);
         ImageView img_back_dialog_date_picker = (ImageView) dialog.findViewById(R.id.img_back_dialog_date_picker);
         ImageView img_go_dialog_date_picker = (ImageView) dialog.findViewById(R.id.img_go_dialog_date_picker);
-        if(background_color_header != 0) {
+        if (background_color_header != 0) {
             container_dialog.setBackgroundColor(background_color_header);
         }
         if (typeface != null) {
@@ -87,13 +91,13 @@ public class DatePickerPersian {
         list_date(new ListenerDateListPickerPersian() {
             @Override
             public void add_list(ArrayList<Integer> data) {
-                data_dialog.add(new DatePickerModelDialog(data, Integer.parseInt(get_jalali_date(System.currentTimeMillis())[0]),get_name_month(data_dialog.size()+1 + "")));
+                data_dialog.add(new DatePickerModelDialog(data, Integer.parseInt(get_jalali_date(System.currentTimeMillis())[0]), get_name_month(data_dialog.size() + 1)));
             }
         });
-        recycler_dialog.setAdapter(new DatePickerAdpaterDialog ( dialog ,context, data_dialog , clickDayListener, background_date_picker_txt_month));
+        recycler_dialog.setAdapter(new DatePickerAdpaterContainer(dialog, context, data_dialog, clickDayListener, background_date_picker_txt_month , backgroundColorDay , backgroundColorCurrentDay));
         recycler_dialog.scrollToPosition(Integer.parseInt(get_jalali_date(System.currentTimeMillis())[1]) - 1);
         txt_year_dialog.setText(get_jalali_date(System.currentTimeMillis())[0]);
-        txt_month_dialog.setText(get_name_month(get_jalali_date(System.currentTimeMillis())[1]));
+        txt_month_dialog.setText(get_name_month(Integer.parseInt(get_jalali_date(System.currentTimeMillis())[1])));
         txt_day_dialog.setText(get_jalali_date(System.currentTimeMillis())[2]);
         img_back_dialog_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,25 +108,25 @@ public class DatePickerPersian {
                 list_date(new ListenerDateListPickerPersian() {
                     @Override
                     public void add_list(ArrayList<Integer> data) {
-                        data_dialog.add(new DatePickerModelDialog(data , year_back , get_name_month(data_dialog.size()+1 + "")));
+                        data_dialog.add(new DatePickerModelDialog(data, year_back, get_name_month(data_dialog.size() + 1)));
                     }
                 });
-                recycler_dialog.setAdapter(new DatePickerAdpaterDialog(dialog , context , data_dialog , clickDayListener ,background_date_picker_txt_month));
+                recycler_dialog.setAdapter(new DatePickerAdpaterContainer(dialog, context, data_dialog, clickDayListener, background_date_picker_txt_month , backgroundColorDay , backgroundColorCurrentDay));
             }
         });
         img_go_dialog_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int year_go = Integer.parseInt(txt_year_dialog.getText().toString())  + 1;
+                final int year_go = Integer.parseInt(txt_year_dialog.getText().toString()) + 1;
                 txt_year_dialog.setText(year_go + "");
                 data_dialog.clear();
                 list_date(new ListenerDateListPickerPersian() {
                     @Override
                     public void add_list(ArrayList<Integer> data) {
-                        data_dialog.add(new DatePickerModelDialog(data , year_go , get_name_month(data_dialog.size()+1 + "")));
+                        data_dialog.add(new DatePickerModelDialog(data, year_go, get_name_month(data_dialog.size() + 1)));
                     }
                 });
-                recycler_dialog.setAdapter(new DatePickerAdpaterDialog(dialog ,context , data_dialog , clickDayListener , background_date_picker_txt_month));
+                recycler_dialog.setAdapter(new DatePickerAdpaterContainer(dialog, context, data_dialog, clickDayListener, background_date_picker_txt_month , backgroundColorDay , backgroundColorCurrentDay));
             }
         });
 
@@ -138,15 +142,40 @@ public class DatePickerPersian {
                 for (int j = 1; j < 32; j++) {
                     data.add(j);
                 }
-                if(listener != null) {
+                if (listener != null) {
                     listener.add_list(data);
                 }
+            } else if (i == 12) {
+                for (int j = 1; j < 30; j++) {
+                    data.add(j);
+                }
+                listener.add_list(data);
             } else {
                 for (int j = 1; j < 31; j++) {
                     data.add(j);
                 }
                 listener.add_list(data);
+
             }
+
+        }
+
+    }
+
+
+    public Typeface get_isnas_bold(Context context) {
+        if(isans_bold == null) {
+            return  isans_bold = Typeface.createFromAsset(context.getAssets() , "fonts/isans_bold.ttf");
+        }else  {
+            return  isans_bold ;
+        }
+    }
+
+    public Typeface get_isnas_normal(Context context) {
+        if(isans_noraml == null) {
+            return  isans_noraml = Typeface.createFromAsset(context.getAssets() , "fonts/isans_normal.ttf");
+        }else  {
+            return  isans_noraml ;
         }
     }
 
@@ -204,7 +233,7 @@ public class DatePickerPersian {
         }
         return  month_int ;
     }
-    public  String get_name_month(String month) {
+    public  String get_name_month(int month) {
         String month_name = "";
         switch (month) {
             case  FARVARDIN :

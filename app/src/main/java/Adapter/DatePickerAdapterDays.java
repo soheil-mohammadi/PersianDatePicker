@@ -1,8 +1,5 @@
 package Adapter;
 
-import android.animation.Animator;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
@@ -21,8 +18,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import Interface.DayClickListenerPersianDatePicker;
+import Interface.OnAnimationEnd;
 
-public class DatePickerAdapterView extends RecyclerView.Adapter<DatePickerAdapterView.view_holder> {
+public class DatePickerAdapterDays extends RecyclerView.Adapter<DatePickerAdapterDays.view_holder> {
 
 
     private static final String TAG = "LOG";
@@ -39,10 +37,15 @@ public class DatePickerAdapterView extends RecyclerView.Adapter<DatePickerAdapte
     private ArrayList<Integer> data ;
     private  String[] jalali_date ;
 
-    public DatePickerAdapterView(@Nullable  Dialog dialog , ArrayList<Integer> data  , int year , int month , DayClickListenerPersianDatePicker clickDayListener) {
+    private  int backgroundColorDay;
+    private   int backgroundColorCurrentDay;
+
+    public DatePickerAdapterDays(@Nullable  Dialog dialog ,  int backgroundColorDay ,   int backgroundColorCurrentDay, ArrayList<Integer> data  , int year , int month , DayClickListenerPersianDatePicker clickDayListener) {
         this.data = data ;
         this.dialog = dialog ;
         this.clickDayListener = clickDayListener ;
+        this.backgroundColorDay = backgroundColorDay ;
+        this.backgroundColorCurrentDay = backgroundColorCurrentDay ;
         jalali_date = DatePickerPersian.get_instance().get_jalali_date(System.currentTimeMillis());
         JalaliCalendar jalaliCalendar = new JalaliCalendar();
         Date date ;
@@ -133,72 +136,60 @@ public class DatePickerAdapterView extends RecyclerView.Adapter<DatePickerAdapte
 
     class  view_holder extends  RecyclerView.ViewHolder {
 
-        View line_border_bottom ;
         CircleText txt_day ;
 
         view_holder(View view) {
             super(view);
-            line_border_bottom =  view.findViewById(R.id.line_border_bottom);
             txt_day = (CircleText) view.findViewById(R.id.txt_day);
         }
     }
 
     private  void set_day_text(view_holder holder , Integer data) {
 
-        holder.txt_day.build(20 , false , Color.GREEN);
+        if(this.backgroundColorDay != 0) {
+            holder.txt_day.build(20 , this.backgroundColorDay, Color.BLACK);
+        }else  {
+            holder.txt_day.build(20 , Color.GRAY, Color.BLACK);
+        }
         holder.txt_day.setText(data + "");
-        holder.line_border_bottom.setVisibility(View.VISIBLE);
 
         if(this.data.size()  > data_position+1 ) {
             data_position++;
         }
         if((this.year + "/" + this.month + "/" + data).equals(Integer.parseInt(jalali_date[0]) +"/" +Integer.parseInt(jalali_date[1])+ "/" + Integer.parseInt(jalali_date[2])) ) {
-            holder.line_border_bottom.setBackgroundColor(Color.GREEN);
-            holder.txt_day.setText(data + "");
+            if(this.backgroundColorCurrentDay != 0) {
+                holder.txt_day.build(20 , this.backgroundColorCurrentDay , Color.BLACK);
+            }else  {
+                holder.txt_day.build(20 , Color.GREEN , Color.BLACK);
+            }
         }
         is_set_first_position = true ;
     }
 
 
     private void handle_click_days(final view_holder holder ) {
-        final int colorFrom = Color.TRANSPARENT;
-        final int colorTo = Color.GREEN;
 
+        if(holder.txt_day.getText().toString().equals("")) {
+            holder.txt_day.setClickable(false);
+            holder.txt_day.setVisibility(View.GONE);
+        }else {
             holder.txt_day.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    clickDayListener.on_click(year, month, Integer.parseInt(holder.txt_day.getText().toString()));
-                    ObjectAnimator colorAnim = ObjectAnimator.ofObject(holder.txt_day , "backgroundColor" , new ArgbEvaluator() , colorFrom , colorTo  );
-                    colorAnim.setDuration(500);
-                    colorAnim.addListener(new Animator.AnimatorListener() {
+                    holder.txt_day.animateBuild(20, Color.WHITE, new OnAnimationEnd() {
                         @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
+                        public void onAnimEnded() {
+                            if(dialog != null ){
+                                dialog.dismiss();
+                            }
                         }
                     });
+                    clickDayListener.on_click(year, month, Integer.parseInt(holder.txt_day.getText().toString()));
 
-                    colorAnim.start();
-                    if(dialog != null ){
-                        dialog.cancel();
-                    }
                 }
             });
         }
+
+    }
 
 }

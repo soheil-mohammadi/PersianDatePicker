@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import Interface.DayClickListenerPersianDatePicker;
 
-public class DatePickerAdpaterDialog extends RecyclerView.Adapter<DatePickerAdpaterDialog.view_holder> {
+public class DatePickerAdpaterContainer extends RecyclerView.Adapter<DatePickerAdpaterContainer.view_holder> {
 
 
     private Context context ;
@@ -25,13 +25,18 @@ public class DatePickerAdpaterDialog extends RecyclerView.Adapter<DatePickerAdpa
     private ArrayList<DatePickerModelDialog> date ;
     private DayClickListenerPersianDatePicker clickDayListener ;
     private int background_date_picker_txt_month ;
+    private  int backgroundColorDay;
+    private   int backgroundColorCurrentDay;
 
-    public  DatePickerAdpaterDialog( Dialog dialog ,Context context  ,ArrayList<DatePickerModelDialog> date , DayClickListenerPersianDatePicker clickDayListener , int background_date_picker_txt_month) {
+    public DatePickerAdpaterContainer(Dialog dialog , Context context  , ArrayList<DatePickerModelDialog> date , DayClickListenerPersianDatePicker clickDayListener , int background_date_picker_txt_month
+    ,  int backgroundColorDay ,int backgroundColorCurrentDay ) {
         this.context = context ;
         this.dialog = dialog ;
         this.date = date ;
         this.clickDayListener = clickDayListener ;
         this.background_date_picker_txt_month = background_date_picker_txt_month ;
+        this.backgroundColorDay = backgroundColorDay ;
+        this.backgroundColorCurrentDay = backgroundColorCurrentDay ;
     }
 
     @Override
@@ -43,7 +48,7 @@ public class DatePickerAdpaterDialog extends RecyclerView.Adapter<DatePickerAdpa
     public void onBindViewHolder(view_holder holder, int position) {
         DatePickerModelDialog data = this.date.get(position);
         holder.date_picker_recycler.setLayoutManager(new RtlGridLayout(this.context ,7  , LinearLayoutManager.VERTICAL ,false));
-        holder.date_picker_recycler.setAdapter(new DatePickerAdapterView(this.dialog ,data.data, data.year , DatePickerPersian.get_instance().get_number_month(data.month) , this.clickDayListener));
+        holder.date_picker_recycler.setAdapter(new DatePickerAdapterDays(this.dialog , this.backgroundColorDay, this.backgroundColorCurrentDay,  data.data, data.year , DatePickerPersian.get_instance().get_number_month(data.month) , this.clickDayListener));
         holder.date_picker_txt_year.setVisibility(View.GONE);
         holder.date_picker_txt_month.setText(data.month);
         if(background_date_picker_txt_month !=0){

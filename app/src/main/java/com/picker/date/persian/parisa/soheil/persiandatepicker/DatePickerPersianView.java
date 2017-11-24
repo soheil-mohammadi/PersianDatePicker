@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,11 +17,15 @@ import Adapter.ViewPagerAdapter;
 
 public class DatePickerPersianView extends LinearLayout {
 
+    private static final String TAG = "DatePickerPersianView";
+
     private  int count_view_pager ;
     private  int start_year = 1390 ;
     private  int end_year = 1400 ;
     private  int background_lable_month;
     private  int current_item_viewPager ;
+    private  int backgroundColorDay;
+    private   int backgroundColorCurrentDay;
 
     private  ViewPager  view_pager_date_picker_persian_view ;
 
@@ -65,13 +70,36 @@ public class DatePickerPersianView extends LinearLayout {
         }else if(this.end_year == year_now){
             this.current_item_viewPager = ((this.count_view_pager - 1) - 11) + month_now - 1;
         }else  {
-            this.current_item_viewPager = ((this.count_view_pager - 1) - 11) + month_now - 1;
+            this.current_item_viewPager = 0 ;
         }
     }
 
-    public void set_support_fragmentManager(FragmentManager fragmentManager ) {
-        view_pager_date_picker_persian_view.setAdapter(new ViewPagerAdapter(fragmentManager, this.count_view_pager , this.current_item_viewPager , this.background_lable_month));
-       view_pager_date_picker_persian_view.setCurrentItem(this.current_item_viewPager);
+
+    public  DatePickerPersianView setColorDay(int colorDay) {
+        this.backgroundColorDay = colorDay ;
+        return  this ;
+    }
+
+    public  DatePickerPersianView setColorCurrentDay(int colorCurrentDay) {
+        this.backgroundColorCurrentDay = colorCurrentDay ;
+        return  this ;
+    }
+
+    public  DatePickerPersianView setStartYear(int start_year) {
+        this.start_year = start_year ;
+        return  this ;
+    }
+
+    public  DatePickerPersianView setEndYear(int end_year) {
+        this.end_year = end_year ;
+        return  this ;
+    }
+
+    public void build(FragmentManager fragmentManager) {
+        inflate(null);
+        view_pager_date_picker_persian_view.setAdapter(new ViewPagerAdapter(fragmentManager,  this.count_view_pager , this.start_year , this.end_year , this.current_item_viewPager , this.background_lable_month
+         , this.backgroundColorDay , this.backgroundColorCurrentDay));
+        view_pager_date_picker_persian_view.setCurrentItem(this.current_item_viewPager);
     }
 }
 
