@@ -1,7 +1,29 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.soheil-mohammadi'
+
+ext {
+    bintrayRepo = 'PersianDatePicker'
+    bintrayName = 'PersianDatePicker'
+
+    publishedGroupId = 'com.soheil-mohammadi'
+    libraryName = 'PersianDatePicker'
+    artifact = 'PersianDatePicker'
+
+    libraryDescription = 'An Material Library For Detecting Date From User In Android ;)'
+
+    siteUrl = 'https://github.com/soheil-mohammadi/PersianDatePicker'
+    gitUrl = 'https://github.com/soheil-mohammadi/PersianDatePicker.git'
+
+    libraryVersion = '2.0.2'
+
+    developerId = 'soheilMohammadi'
+    developerName = 'Soheil Mohammadi'
+    developerEmail = 'mad4r20@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 25
@@ -31,3 +53,5 @@ dependencies {
     compile 'com.android.support:design:25.3.0'
     testCompile 'junit:junit:4.12'
 }
+
+apply from: 'publish.gradle'
