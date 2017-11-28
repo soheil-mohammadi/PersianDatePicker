@@ -13,7 +13,7 @@ In this version we added beauty animations and improve codes . enjoy it :)
 Add the dependency :
 ```gradle
 	dependencies {
-	       compile 'com.soheil-mohammadi:PersianDatePicker:2.0.2'
+	       compile 'com.soheil-mohammadi:PersianDatePickerModule:2.0.4'
 	}
 
 ```
