@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PersianDatePicker.iml" filepath="$PROJECT_DIR$/PersianDatePicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PersianDatePickerModule/PersianDatePickerModule.iml" filepath="$PROJECT_DIR$/PersianDatePickerModule/PersianDatePickerModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PersianDatePickerModule/app.iml" filepath="$PROJECT_DIR$/PersianDatePickerModule/app.iml" />
     </modules>
   </component>
 </project>
