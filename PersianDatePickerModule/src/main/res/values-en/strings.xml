@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PersianDatePicker</string>
+    <string name="action_settings">Settings</string>
+    <string name="farvardin">January</string>
+    <string name="ordibehesht">February </string>
+    <string name="khordad">March</string>
+    <string name="tir">April</string>
+    <string name="mordad">May</string>
+    <string name="shahrivar">June</string>
+    <string name="mehr">July</string>
+    <string name="aban">August</string>
+    <string name="azar">September</string>
+    <string name="dey">October</string>
+    <string name="bahman">November</string>
+    <string name="esfand">December</string>
+    <string name="today">Today :</string>
+    <string name="friday">Fr</string>
+    <string name="thursday">Th</string>
+    <string name="wednesday">We</string>
+    <string name="tusday">Tu</string>
+    <string name="monday">Mo</string>
+    <string name="sunday">Su</string>
+    <string name="saturday">Sa</string>
+</resources>

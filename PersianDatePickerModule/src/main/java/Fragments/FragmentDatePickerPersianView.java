@@ -5,15 +5,16 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.DatePickerPersian;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.R;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.RtlGridLayout;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.DatePickerPersian;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.R;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.RtlGridLayout;
 import java.util.ArrayList;
 
 import Adapter.DatePickerAdapterDays;
@@ -44,15 +45,15 @@ public class FragmentDatePickerPersianView extends Fragment {
     private TextView txt_thursday ;
     private TextView txt_friday ;
 
-    private    final  String  YEAR = "YEAR";
-    private    final  String MONTH = "MONTH";
-    private    final  String DATA = "ADAPTER";
-    private    final  String BACK_COLOR_MONTH = "BACK_COLOR_MONTH";
-    private    final  String BACK_COLOR_DAY = "BACK_COLOR_DAY";
-    private    final  String BACK_COLOR_CURRENT_DAY = "BACK_COLOR_CURRENT_DAY";
+    private  static    final  String  YEAR = "YEAR";
+    private  static   final  String MONTH = "MONTH";
+    private static    final  String DATA = "ADAPTER";
+    private   static final  String BACK_COLOR_MONTH = "BACK_COLOR_MONTH";
+    private   static final  String BACK_COLOR_DAY = "BACK_COLOR_DAY";
+    private   static final  String BACK_COLOR_CURRENT_DAY = "BACK_COLOR_CURRENT_DAY";
 
 
-    public  FragmentDatePickerPersianView newInstance(ArrayList<Integer> data , int year , String month ,  int background_lable_month
+    public  static  FragmentDatePickerPersianView newInstance(ArrayList<Integer> data , int year , String month ,  int background_lable_month
                                                      , int backgroundColorDay ,  int backgroundColorCurrentDay) {
         Bundle args = new Bundle();
         args.putInt(YEAR ,year);
@@ -92,10 +93,9 @@ public class FragmentDatePickerPersianView extends Fragment {
         txt_thursday = (TextView) view.findViewById(R.id.txt_thursday);
         txt_friday = (TextView) view.findViewById(R.id.txt_friday);
 
-
-
-        date_picker_recycler.setLayoutManager(new RtlGridLayout(getContext() , 7 , LinearLayoutManager.VERTICAL , false));
-        date_picker_recycler.setAdapter(new DatePickerAdapterDays( null, this.backgroundColorDay , this.backgroundColorCurrentDay, this.data, this.year , DatePickerPersian.get_instance().get_number_month(this.month) , this.clickListenerday));
+        date_picker_recycler.setLayoutManager(DatePickerPersian.get_instance().isDevicePersian(getContext()) ? new RtlGridLayout(getContext() , 7 , LinearLayoutManager.VERTICAL , false):
+        new GridLayoutManager(getContext() , 7 , LinearLayoutManager.VERTICAL , false));
+        date_picker_recycler.setAdapter(new DatePickerAdapterDays( null, getContext() , this.backgroundColorDay , this.backgroundColorCurrentDay, this.data, this.year , DatePickerPersian.get_instance().get_number_month(this.month , getContext()) , this.clickListenerday));
         date_picker_txt_year.setText(this.year + "");
         date_picker_txt_month.setText(this.month);
         if(background_lable_month != 0) {

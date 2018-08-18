@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.picker.date.persian.parisa.soheil.persiandatepicker.MainActivity"
+    tools:context="com.picker.date.persian.parisa.soheil.PersianDatePickerModule.MainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
 
 
-    <com.picker.date.persian.parisa.soheil.persiandatepicker.DatePickerPersianView
+    <com.picker.date.persian.parisa.soheil.PersianDatePickerModule.DatePickerPersianView
         android:id="@+id/date_picker_persian"
         android:layout_width="match_parent"
         android:layout_height="0dp"

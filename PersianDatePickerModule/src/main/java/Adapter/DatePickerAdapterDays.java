@@ -1,17 +1,19 @@
 package Adapter;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.picker.date.persian.parisa.soheil.persiandatepicker.CircleText;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.DatePickerPersian;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.JalaliCalendar;
-import com.picker.date.persian.parisa.soheil.persiandatepicker.R;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.CircleText;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.DatePickerPersian;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.JalaliCalendar;
+import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,13 +42,13 @@ public class DatePickerAdapterDays extends RecyclerView.Adapter<DatePickerAdapte
     private  int backgroundColorDay;
     private   int backgroundColorCurrentDay;
 
-    public DatePickerAdapterDays(@Nullable  Dialog dialog ,  int backgroundColorDay ,   int backgroundColorCurrentDay, ArrayList<Integer> data  , int year , int month , DayClickListenerPersianDatePicker clickDayListener) {
+    public DatePickerAdapterDays(@Nullable  Dialog dialog  , Context  context , int backgroundColorDay , int backgroundColorCurrentDay, ArrayList<Integer> data  , int year , int month , DayClickListenerPersianDatePicker clickDayListener) {
         this.data = data ;
         this.dialog = dialog ;
         this.clickDayListener = clickDayListener ;
         this.backgroundColorDay = backgroundColorDay ;
         this.backgroundColorCurrentDay = backgroundColorCurrentDay ;
-        jalali_date = DatePickerPersian.get_instance().get_jalali_date(System.currentTimeMillis());
+        jalali_date = DatePickerPersian.get_instance().getDateByLang(context ,System.currentTimeMillis()).split("/");
         JalaliCalendar jalaliCalendar = new JalaliCalendar();
         Date date ;
         if(year == 0 || month == 0) {
@@ -56,9 +58,13 @@ public class DatePickerAdapterDays extends RecyclerView.Adapter<DatePickerAdapte
         }else  {
             this.year = year ;
             this.month =  month;
-            date = jalaliCalendar.getGregorianDate(year + "/" + month   + "/" + 1);
+            date = jalaliCalendar.getGregorianDate(year + "/" + month + "/" + 1);
         }
-        calendar.setTimeInMillis(date.getTime());
+
+        if(DatePickerPersian.get_instance().isDevicePersian(context))
+            calendar.setTime(date);
+        else
+            calendar.set(year , month-1 , 1);
     }
 
     @Override
@@ -95,6 +101,7 @@ public class DatePickerAdapterDays extends RecyclerView.Adapter<DatePickerAdapte
                         set_day_text(holder , data_item);
                     }
                     break;
+
                 //پنج شنبه :
                 case  5 :
                     if(position == 5) {
@@ -113,8 +120,6 @@ public class DatePickerAdapterDays extends RecyclerView.Adapter<DatePickerAdapte
                     break;
             }
         }else  {
-
-
             if(position+1 <= data.size()) {
                 set_day_text(holder , data_item);
 

@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PersianDatePicker.iml" filepath="$PROJECT_DIR$/PersianDatePicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/PersianDatePickerModule/PersianDatePickerModule.iml" filepath="$PROJECT_DIR$/PersianDatePickerModule/PersianDatePickerModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/persiandatepicker/PersianDatePickerModule.iml" filepath="$PROJECT_DIR$/persiandatepicker/PersianDatePickerModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/PersianDatePickerModule/app.iml" filepath="$PROJECT_DIR$/PersianDatePickerModule/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PersianDatePickerModule/persiandatepicker.iml" filepath="$PROJECT_DIR$/PersianDatePickerModule/persiandatepicker.iml" />
     </modules>
   </component>
 </project>

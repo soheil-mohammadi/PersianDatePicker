@@ -1,12 +1,10 @@
 apply plugin: 'com.android.library'
 
-
-
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -37,3 +35,4 @@ dependencies {
 }
 
 apply from: 'https://raw.githubusercontent.com/bourdakos1/jCenter-Upload/master/upload.gradle'
+
