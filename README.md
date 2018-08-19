@@ -4,8 +4,8 @@ It works for api +14 ;)
 
 <img src="https://github.com/soheil-mohammadi/PersianDatePicker/blob/master/intro_lib.gif" width="40%"/> 
 
-# Version 2.0 released!
-
+# Version 2.2.5 released!
+Added English Lanuage :)
 In this version we added beauty animations and improve codes . enjoy it :) 
 
 
@@ -13,7 +13,7 @@ In this version we added beauty animations and improve codes . enjoy it :)
 Add the dependency :
 ```gradle
 	dependencies {
-	       compile 'com.soheil-mohammadi:PersianDatePickerModule:2.0.4'
+	       compile 'com.soheil-mohammadi:PersianDatePickerModule:2.2.5'
 	}
 
 ```
