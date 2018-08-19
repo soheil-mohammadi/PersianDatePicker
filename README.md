@@ -29,6 +29,7 @@ It can used by showing a material custom view that can for paging dates for dete
 # Dialog Date Picker :
 
 <img src="https://github.com/soheil-mohammadi/PersianDatePicker/blob/master/DialogDatePicker.png" width="50%" />
+<img src="https://github.com/soheil-mohammadi/PersianDatePicker/blob/master/Screen%20Shot%202018-08-19%20at%2010.39.10.png" width="50%" />
 In the xml layout  file :
 
 ```xml
@@ -100,6 +101,7 @@ This styles have beauty animtions for your dialog :)  <br>
   # View Date Picker :
   
   <img src="https://github.com/soheil-mohammadi/PersianDatePicker/blob/master/ViewDatePicker.png" width="50%" />
+    <img src="https://github.com/soheil-mohammadi/PersianDatePicker/blob/master/Screen%20Shot%202018-08-19%20at%2010.40.15.png" width="50%" />
 In the xml layout  file :
 
 ```xml
