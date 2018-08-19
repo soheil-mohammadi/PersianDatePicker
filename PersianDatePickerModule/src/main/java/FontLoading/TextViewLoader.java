@@ -1,4 +1,4 @@
-package FontLoader;
+package FontLoading;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -45,6 +45,6 @@ public class TextViewLoader extends android.support.v7.widget.AppCompatTextView 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        setTypeface(FontLoader.getFont(getContext() , "main" , isTypeBold));
+        setTypeface(Font.getFont(getContext() , "main" , isTypeBold));
     }
 }

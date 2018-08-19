@@ -6,10 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
-import FontLoader.FontLoader;
+import FontLoading.Font;
 import Interface.OnAnimationEnd;
 
 /**
@@ -124,7 +123,7 @@ public class CircleText extends TextView {
 
 
         super.onDraw(canvas);
-        setTypeface(FontLoader.getFont(getContext() , "main" , false));
+        setTypeface(Font.getFont(getContext() , "main" , false));
 
     }
 

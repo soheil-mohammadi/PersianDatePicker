@@ -1,4 +1,4 @@
-package FontLoader;
+package FontLoading;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,7 +10,7 @@ import com.picker.date.persian.parisa.soheil.PersianDatePickerModule.DatePickerP
  * Created by soheilmohammadi on 8/4/18.
  */
 
-public class FontLoader {
+public class Font {
 
     private static LruCache<String , Typeface> cache = new LruCache<>(16);
     private static final  String spliter = "@H@";
